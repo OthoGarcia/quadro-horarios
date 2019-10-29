@@ -28,3 +28,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('professores', 'Professor\\ProfessoresController');
+Route::resource('grades', 'Grade\\GradesController');
