@@ -1,0 +1,32 @@
+{
+    "fields": [
+        {
+            "name": "nome",
+            "type": "string"
+        },
+        {
+            "name": "periodo_id",
+            "type": "integer#unsigned"
+        }
+    ],
+    "foreign_keys": [
+        {
+            "column": "periodo_id",
+            "references": "id",
+            "on": "periodos"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "periodo",
+            "type": "belongsTo",
+            "class": "App\\Periodo"
+        }
+    ],
+    "validations": [
+        {
+            "field": "nome",
+            "rules": "required"
+        }
+    ]
+}

@@ -31,3 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('professores', 'Professor\\ProfessoresController');
 Route::resource('grades', 'Grade\\GradesController');
+Route::resource('materias', 'Materia\\MateriasController');
+Route::resource('periodos', 'Periodo\\PeriodosController');
+Route::resource('periodos', 'Periodo\\PeriodosController');
+Route::resource('turmas', 'Turmas\\TurmasController');
