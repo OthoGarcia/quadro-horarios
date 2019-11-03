@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Turmas;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\Periodo;
 use App\Turma;
 use Illuminate\Http\Request;
 
@@ -38,7 +38,8 @@ class TurmasController extends Controller
      */
     public function create()
     {
-        return view('turmas.create');
+        $periodos = Periodo::all();
+        return view('turmas.create', compact('periodos'));
     }
 
     /**
@@ -84,8 +85,8 @@ class TurmasController extends Controller
     public function edit($id)
     {
         $turma = Turma::findOrFail($id);
-
-        return view('turmas.edit', compact('turma'));
+        $periodos = Periodo::all();
+        return view('turmas.edit', compact('turma', 'periodos'));
     }
 
     /**

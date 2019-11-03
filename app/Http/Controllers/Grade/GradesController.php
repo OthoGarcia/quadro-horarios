@@ -37,6 +37,7 @@ class GradesController extends Controller
      */
     public function create()
     {
+        
         return view('grades.create');
     }
 

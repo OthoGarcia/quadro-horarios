@@ -13,6 +13,24 @@
     <input class="form-control" name="quantidade_aulas" type="number" id="quantidade_aulas" value="{{ isset($professor->quantidade_aulas) ? $professor->quantidade_aulas : ''}}" >
     {!! $errors->first('quantidade_aulas', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('materia_id') ? 'has-error' : ''}}">
+    <label for="" class="control-label">{{ 'Materias' }}</label>
+    <select class="form-control" name="materia_id[]" multiple> 
+        @foreach($materias as $materia)
+            <option {{ isset($professor) && $professor->materias->contains($materia)? 'selected' : '' }} value="{{ $materia->id }}">{{$materia->nome}}</option>
+        @endforeach
+    </select>
+    {!! $errors->first('', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('grade_id') ? 'has-error' : ''}}">
+    <label for="" class="control-label">{{ 'grades' }}</label>
+    <select class="form-control" name="grade_id[]" multiple> 
+        @foreach($grades as $grade)
+            <option {{ isset($professor) && $professor->grades->contains($grade)? 'selected' : '' }} value="{{ $grade->id }}">{{$grade->nome}}</option>
+        @endforeach
+    </select>
+    {!! $errors->first('', '<p class="help-block">:message</p>') !!}
+</div>
 
 
 <div class="form-group">

@@ -7,13 +7,13 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Professores</div>
+                    <div class="card-header">Quadrohorarios</div>
                     <div class="card-body">
-                        <a href="{{ url('/professores/create') }}" class="btn btn-success btn-sm" title="Add New Professor">
+                        <a href="{{ url('/quadro-horarios/create') }}" class="btn btn-success btn-sm" title="Add New QuadroHorario">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        <form method="GET" action="{{ url('/professores') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                        <form method="GET" action="{{ url('/quadro-horarios') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                                 <span class="input-group-append">
@@ -30,30 +30,29 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Nome</th><th>Prioridade</th><th>Quantidade Aulas</th><th>Actions</th>
+                                        <th>#</th><th>Quantidade Tempos</th><th>Tempo Intervalo</th><th>Turma Id</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($professores as $item)
+                                @foreach($quadrohorarios as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->nome }}</td><td>{{ $item->prioridade }}</td><td>{{ $item->quantidade_aulas }}</td>
+                                        <td>{{ $item->quantidade_tempos }}</td><td>{{ $item->tempo_intervalo }}</td><td>{{ $item->turma_id }}</td>
                                         <td>
-                                            <a href="{{ url('/professores/' . $item->id) }}" title="View Professor"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/professores/periodos/' . $item->id) }}" title="View Professor"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Dias Disponiveis</button></a>
-                                            <a href="{{ url('/professores/' . $item->id . '/edit') }}" title="Edit Professor"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/quadro-horarios/' . $item->id) }}" title="View QuadroHorario"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/quadro-horarios/' . $item->id . '/edit') }}" title="Edit QuadroHorario"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                                            <form method="POST" action="{{ url('/professores' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/quadro-horarios' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Professor" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete QuadroHorario" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $professores->appends(['search' => Request::get('search')])->render() !!} </div>
+                            <div class="pagination-wrapper"> {!! $quadrohorarios->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
 
                     </div>

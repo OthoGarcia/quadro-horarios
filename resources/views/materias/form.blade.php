@@ -14,9 +14,13 @@
     {!! $errors->first('quebrar', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('grade_id') ? 'has-error' : ''}}">
-    <label for="grade_id" class="control-label">{{ 'Grade Id' }}</label>
-    <input class="form-control" name="grade_id" type="number" id="grade_id" value="{{ isset($materia->grade_id) ? $materia->grade_id : ''}}" >
-    {!! $errors->first('grade_id', '<p class="help-block">:message</p>') !!}
+    <label for="" class="control-label">{{ 'Grades' }}</label>
+    <select class="form-control" name="grade_id"> 
+        @foreach($grades as $grade)
+            <option value="{{ $grade->id }}">{{$grade->nome}}</option>
+        @endforeach
+    </select>
+    {!! $errors->first('', '<p class="help-block">:message</p>') !!}
 </div>
 
 

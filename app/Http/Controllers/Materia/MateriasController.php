@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Materia;
 
+use App\Grade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
@@ -40,7 +41,8 @@ class MateriasController extends Controller
      */
     public function create()
     {
-        return view('materias.create');
+        $grades = Grade::all();
+        return view('materias.create', compact('grades'));
     }
 
     /**

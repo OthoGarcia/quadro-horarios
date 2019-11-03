@@ -31,5 +31,11 @@ class Periodo extends Model
     {
         return $this->belongsTo('App\Grade');
     }
+
+    public function turnos()
+    {
+        return $this->belongsToMany('App\Turno', 'periodo_turno');
+    }
+    
     
 }

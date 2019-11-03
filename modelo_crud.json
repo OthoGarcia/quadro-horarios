@@ -1,32 +1,45 @@
 {
     "fields": [
         {
-            "name": "nome",
-            "type": "string"
+            "name": "quantidade_tempos",
+            "type": "integer"
         },
         {
-            "name": "periodo_id",
+            "name": "tempo_intervalo",
+            "type": "integer"
+        },
+        {
+            "name": "turma_id",
             "type": "integer#unsigned"
         }
     ],
     "foreign_keys": [
         {
-            "column": "periodo_id",
+            "column": "turma_id",
             "references": "id",
-            "on": "periodos"
+            "on": "turmas"
         }
     ],
     "relationships": [
         {
-            "name": "periodo",
+            "name": "turma",
             "type": "belongsTo",
-            "class": "App\\Periodo"
+            "class": "App\\Turma"
         }
     ],
     "validations": [
         {
-            "field": "nome",
+            "field": "quantidade_tempos",
+            "rules": "required"
+        },
+        {
+            "field": "turma_id",
+            "rules": "required"
+        },
+        {
+            "field": "tempo_intervalo",
             "rules": "required"
         }
+        
     ]
 }

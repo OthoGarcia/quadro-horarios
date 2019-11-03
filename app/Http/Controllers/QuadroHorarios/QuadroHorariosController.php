@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Periodo;
+namespace App\Http\Controllers\QuadroHorarios;
 
-use App\Grade;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Periodo;
+use App\QuadroHorario;
+use App\Turma;
 use Illuminate\Http\Request;
 
-class PeriodosController extends Controller
+class QuadroHorariosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,13 +22,15 @@ class PeriodosController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $periodos = Periodo::where('nome', 'LIKE', "%$keyword%")
+            $quadrohorarios = QuadroHorario::where('quantidade_tempos', 'LIKE', "%$keyword%")
+                ->orWhere('tempo_intervalo', 'LIKE', "%$keyword%")
+                ->orWhere('turma_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $periodos = Periodo::latest()->paginate($perPage);
+            $quadrohorarios = QuadroHorario::latest()->paginate($perPage);
         }
 
-        return view('periodos.index', compact('periodos'));
+        return view('quadro-horarios.index', compact('quadrohorarios'));
     }
 
     /**
@@ -38,8 +40,8 @@ class PeriodosController extends Controller
      */
     public function create()
     {
-        $grades = Grade::all();
-        return view('periodos.create', compact('grades'));
+        $turmas = Turma::all();
+        return view('quadro-horarios.create', compact('turmas'));
     }
 
     /**
@@ -52,13 +54,15 @@ class PeriodosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'nome' => 'required'
+			'quantidade_tempos' => 'required',
+			'turma_id' => 'required',
+			'tempo_intervalo' => 'required'
 		]);
         $requestData = $request->all();
         
-        Periodo::create($requestData);
+        QuadroHorario::create($requestData);
 
-        return redirect('periodos')->with('flash_message', 'Periodo added!');
+        return redirect('quadro-horarios')->with('flash_message', 'QuadroHorario added!');
     }
 
     /**
@@ -70,9 +74,9 @@ class PeriodosController extends Controller
      */
     public function show($id)
     {
-        $periodo = Periodo::findOrFail($id);
+        $quadrohorario = QuadroHorario::findOrFail($id);
 
-        return view('periodos.show', compact('periodo'));
+        return view('quadro-horarios.show', compact('quadrohorario'));
     }
 
     /**
@@ -84,9 +88,9 @@ class PeriodosController extends Controller
      */
     public function edit($id)
     {
-        $periodo = Periodo::findOrFail($id);
-        $grades = Grade::all();
-        return view('periodos.edit', compact('periodo', 'grades'));
+        $quadrohorario = QuadroHorario::findOrFail($id);
+        $turmas = Turma::all();
+        return view('quadro-horarios.edit', compact('quadrohorario', 'turmas'));
     }
 
     /**
@@ -100,14 +104,16 @@ class PeriodosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'nome' => 'required'
+			'quantidade_tempos' => 'required',
+			'turma_id' => 'required',
+			'tempo_intervalo' => 'required'
 		]);
         $requestData = $request->all();
         
-        $periodo = Periodo::findOrFail($id);
-        $periodo->update($requestData);
+        $quadrohorario = QuadroHorario::findOrFail($id);
+        $quadrohorario->update($requestData);
 
-        return redirect('periodos')->with('flash_message', 'Periodo updated!');
+        return redirect('quadro-horarios')->with('flash_message', 'QuadroHorario updated!');
     }
 
     /**
@@ -119,8 +125,8 @@ class PeriodosController extends Controller
      */
     public function destroy($id)
     {
-        Periodo::destroy($id);
+        QuadroHorario::destroy($id);
 
-        return redirect('periodos')->with('flash_message', 'Periodo deleted!');
+        return redirect('quadro-horarios')->with('flash_message', 'QuadroHorario deleted!');
     }
 }

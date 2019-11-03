@@ -27,5 +27,18 @@ class Professor extends Model
      */
     protected $fillable = ['nome', 'prioridade', 'quantidade_aulas'];
 
+    public function materias()
+    {
+        return $this->belongsToMany('App\Materia', 'professor_materia');
+    }    
+
+    public function grades()
+    {
+        return $this->belongsToMany('App\Grade', 'professor_grade');
+    }
+    public function turnos()
+    {
+        return $this->hasMany('App\Turno');
+    }
     
 }

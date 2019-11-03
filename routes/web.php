@@ -30,8 +30,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('professores', 'Professor\\ProfessoresController');
+Route::get('professores/periodos/{id}', 'Professor\\ProfessoresController@exibindo_periodos')->name('exibir_periodos');
+Route::post('professores/periodos', 'Professor\\ProfessoresController@cadastrar_periodos');
+
 Route::resource('grades', 'Grade\\GradesController');
 Route::resource('materias', 'Materia\\MateriasController');
 Route::resource('periodos', 'Periodo\\PeriodosController');
 Route::resource('periodos', 'Periodo\\PeriodosController');
 Route::resource('turmas', 'Turmas\\TurmasController');
+Route::resource('quadro-horarios', 'QuadroHorarios\\QuadroHorariosController');

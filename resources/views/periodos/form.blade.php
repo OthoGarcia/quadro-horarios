@@ -4,9 +4,13 @@
     {!! $errors->first('nome', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('grade_id') ? 'has-error' : ''}}">
-    <label for="grade_id" class="control-label">{{ 'Grade Id' }}</label>
-    <input class="form-control" name="grade_id" type="number" id="grade_id" value="{{ isset($periodo->grade_id) ? $periodo->grade_id : ''}}" >
-    {!! $errors->first('grade_id', '<p class="help-block">:message</p>') !!}
+    <label for="" class="control-label">{{ 'grades' }}</label>
+    <select class="form-control" name="grade_id"> 
+        @foreach($grades as $grade)
+            <option {{ isset($professor) && $professor->grades->contains($grade)? 'selected' : '' }} value="{{ $grade->id }}">{{$grade->nome}}</option>
+        @endforeach
+    </select>
+    {!! $errors->first('', '<p class="help-block">:message</p>') !!}
 </div>
 
 

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Materia extends Model
+class QuadroHorario extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'materias';
+    protected $table = 'quadro_horarios';
 
     /**
     * The database primary key value.
@@ -25,15 +25,11 @@ class Materia extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'quantidade_aulas', 'quebrar', 'grade_id'];
+    protected $fillable = ['quantidade_tempos', 'tempo_intervalo', 'turma_id'];
 
-    public function grade()
+    public function turma()
     {
-        return $this->belongsTo('App\Grade');
+        return $this->belongsTo('App\Turma');
     }
     
-    public function professores()
-    {
-        return $this->belongsToMany('App\Professor', 'professor_materia');
-    }    
 }
