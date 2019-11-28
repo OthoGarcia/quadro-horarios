@@ -25,11 +25,16 @@ class Turma extends Model
      *
      * @var array
      */
-    protected $fillable = ['nome', 'periodo_id'];
+    protected $fillable = ['nome', 'periodo_id', 'turno'];
 
     public function periodo()
     {
         return $this->belongsTo('App\Periodo');
+    }
+
+    public function quadrosHorarios()
+    {
+        return $this->hasMany('App\QuadroHorario');
     }
     
 }

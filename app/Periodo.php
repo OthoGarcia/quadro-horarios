@@ -12,6 +12,7 @@ class Periodo extends Model
      * @var string
      */
     protected $table = 'periodos';
+    protected $with = ['turnos', 'turmas'];
 
     /**
     * The database primary key value.
@@ -37,5 +38,9 @@ class Periodo extends Model
         return $this->belongsToMany('App\Turno', 'periodo_turno');
     }
     
+    public function turmas()
+    {
+        return $this->hasMany('App\Turma');
+    }
     
 }

@@ -12,7 +12,15 @@
     </select>
     {!! $errors->first('', '<p class="help-block">:message</p>') !!}
 </div>
-
+<div class="form-group col-md-4">
+    <label for="" class="control-label">{{ 'Turno' }}</label>
+    <select id="turno_id"  class="form-control" name="turno" required>
+        <option value="">Selecione o turno</option>
+        <option {{ (isset($turma) && $turma->turno == 1) ? 'selected' : '' }} value="1">Manhã</option>
+        <option {{ (isset($turma) && $turma->turno == 2) ? 'selected' : '' }} value="2">Tarde</option>
+        <option {{ (isset($turma) && $turma->turno == 3) ? 'selected' : '' }}value="3">Noite</option>
+    </select>
+</div> 
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">

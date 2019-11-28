@@ -12,6 +12,7 @@ class Grade extends Model
      * @var string
      */
     protected $table = 'grades';
+    protected $with = ['periodos'];
 
     /**
     * The database primary key value.
@@ -27,5 +28,14 @@ class Grade extends Model
      */
     protected $fillable = ['nome'];
 
+ 
+    public function periodos()
+    {
+        return $this->hasMany('App\Periodo');
+    }
     
+    public function materias()
+    {
+        return $this->hasMany('App\Materia');
+    }
 }

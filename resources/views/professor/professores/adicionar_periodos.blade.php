@@ -43,23 +43,23 @@
                                 <label for="" class="control-label">{{ 'periodos' }}</label>
                                 <select onchange="atualizar_periodo_turno()" id="periodo_id" class="form-control" name="periodo_id"> 
                                     @foreach($periodos as $periodo)
-                                        <option value="{{ $periodo->id }}">{{$periodo->nome}}</option>
+                                        <option {{$periodo_id == $periodo->id ? 'selected' : ''}} value="{{ $periodo->id }}">{{$periodo->nome}}</option>
                                     @endforeach
                                 </select>
                                 {!! $errors->first('', '<p class="help-block">:message</p>') !!}
                             </div>                            
                             <div class="col-md-12">
-                                <div class="col-md-4">
+                                <div class="form-group col-md-4">
                                     <label for="" class="control-label">{{ 'Turno' }}</label>
-                                    <select id="turno_id" onchange="atualizar_periodo_turno()" class="form-control" name="turno">
+                                    <select id="turno_id" onchange="atualizar_periodo_turno()" class="form-control" name="turno" required>
                                         <option {{ ($turno == 1) ? 'selected' : '' }} value="1">Manhã</option>
                                         <option {{ ($turno == 2) ? 'selected' : '' }} value="2">Tarde</option>
                                         <option {{ ($turno == 3) ? 'selected' : '' }}value="3">Noite</option>
                                     </select>
                                 </div> 
-                                <div class="col-md-4">
+                                <div class="form-group col-md-4">
                                     <label for="" class="control-label">{{ 'Dias disponiveis' }}</label>
-                                    <select class="form-control" name="dia_da_semana[]" multiple>
+                                    <select class="form-control" name="dia_da_semana[]" multiple required> 
 
                                         <option {{ $dias_da_semana->contains(1)? 'selected' : '' }} value="1">Segunda-Feira</option>
                                         <option {{ $dias_da_semana->contains(2)? 'selected' : '' }} value="2">Terça-Feira</option>

@@ -147,9 +147,9 @@ class ProfessoresController extends Controller
         
         $periodos   = Periodo::all();
         $turno = 1;
-        
+        $periodo_id = $request->periodo_id;
         if($request->has('periodo_id')){
-            $periodo    = Periodo::findOrFail($request->periodo_id);
+            $periodo    = Periodo::findOrFail($periodo_id);
             $dias_da_semana = $periodo->turnos()                                        
                                         ->where('turno', $request->turno)
                                         ->where('professor_id', $id)
@@ -164,7 +164,7 @@ class ProfessoresController extends Controller
             //dd($dias_da_semana, $periodos[0]->id);
         }        
 
-        return view('professor.professores.adicionar_periodos', compact('professor', 'periodos', 'dias_da_semana', 'turno'));
+        return view('professor.professores.adicionar_periodos', compact('professor', 'periodos', 'dias_da_semana', 'turno', 'periodo_id'));
     }
 
     public function buscar_professor_periodo(Request $request)
@@ -181,7 +181,10 @@ class ProfessoresController extends Controller
         //não vou poder usar o sync
         $professor  = Professor::findOrFail($request->professor_id);
         $periodo    = Periodo::findOrFail($request->periodo_id);        
-        $desvicular_turnos = $periodo->turnos()->where("turno", $request->turno)->pluck("turnos.id");
+        $desvicular_turnos = $periodo->turnos()
+                                ->where("turno", $request->turno)
+                                ->where("professor_id", $professor->id)
+                                ->pluck("turnos.id");
         
         $periodo->turnos()->toggle($desvicular_turnos);        
     
